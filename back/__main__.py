@@ -1,6 +1,7 @@
 from sys import stdin
 from time import sleep
-from back.worker import clean_text
+
+from .worker import clean_text
 
 while True:
     try:
