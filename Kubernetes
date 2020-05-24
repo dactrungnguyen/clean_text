@@ -22,6 +22,6 @@ view info
     k describe pod clean-text
     k describe deployment clean-text-85ccd685cb-gltnz
 
-stop the app: delete the deployment then the running pods
+stop the app: delete the deployment
     k delete deployment clean-text
-    k delete pod clean-text-85ccd685cb-gltnz
+    corresponding pods will be automatically terminated
