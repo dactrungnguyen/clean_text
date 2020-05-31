@@ -1,12 +1,7 @@
 from sys import stdin
 from time import sleep
 
-from source.worker import clean_text
+from source.back.worker import clean_text
 
-while True:
-    try:
-        print('I am running')
-        sleep(1)
-    except KeyboardInterrupt:
-        print('\nBye!')
-        exit(1)
+if __name__ == "__main__":
+    print(clean_text(stdin.read()))
