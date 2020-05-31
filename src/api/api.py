@@ -1,5 +1,6 @@
 from flask import Flask, request
 from flask_restplus import Api, fields, reqparse, Resource
+from werkzeug.datastructures import FileStorage
 
 from src.back.worker import clean_text
 
@@ -16,7 +17,7 @@ class Hello(Resource):
 
 
 parser = reqparse.RequestParser()
-parser.add_argument('input_text', type=str)
+parser.add_argument('file', type=FileStorage, location='files')
 
 input_model = api.model('Input', {
     'clean_text': fields.String,
@@ -28,6 +29,6 @@ class Clean(Resource):
     @api.marshal_with(input_model)
     def post(self):
         args = parser.parse_args()
-        input_text = args['input_text']
-        clean_text = '' if input_text is None else clean_text(input_text)
-        return {'clean_text': clean_text}
+        uploaded = args['file']
+        input_text = '' if uploaded is None else uploaded.stream.read().decode()
+        return {'clean_text': clean_text(input_text)}
