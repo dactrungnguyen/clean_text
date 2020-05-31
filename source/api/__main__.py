@@ -13,7 +13,13 @@ class HelloWorld(Resource):
         return 'Hello world!'
 
 
-@api.route('/<string:todo_id>')
+@api.route('/todos')
+class Todos(Resource):
+    def get(self):
+        return todos
+
+
+@api.route('/todos/<string:todo_id>')
 class TodoSimple(Resource):
     def get(self, todo_id):
         return {todo_id: todos[todo_id]}
