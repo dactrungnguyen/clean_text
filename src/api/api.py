@@ -1,7 +1,7 @@
 from flask import Flask, request
 from flask_restplus import Api, fields, reqparse, Resource
 
-from source.back.worker import clean_text
+from src.back.worker import clean_text
 
 app = Flask(__name__)
 api = Api(app)
