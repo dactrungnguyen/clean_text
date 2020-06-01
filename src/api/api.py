@@ -19,14 +19,14 @@ class Hello(Resource):
 parser = reqparse.RequestParser()
 parser.add_argument('file', type=FileStorage, location='files')
 
-input_model = api.model('Input', {
+output_model = api.model('Output', {
     'clean_text': fields.String,
 })
 
 @api.route('/clean')
 @api.expect(parser)
 class Clean(Resource):
-    @api.marshal_with(input_model)
+    @api.marshal_with(output_model)
     def post(self):
         args = parser.parse_args()
         uploaded = args['file']
