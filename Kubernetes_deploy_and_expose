@@ -1,0 +1,23 @@
+Prepare Docker image
+    docker build -f infra/Dockerfile -t dtndocker2/clean-text:<0.7> .
+    docker push dtndocker2/clean-text:<0.7>
+
+Deploy and expose
+    <edit> infra/front.yaml : tag <0.7>
+    kubectl apply -f infra/front.yaml
+
+Access
+    minikube service clean-text-service: not working
+    forward port:
+        k port-forward svc/clean-text-service 8080:6000
+    service is available at localhost:8080
+
+Stop
+    kubectl delete service clean-text-service
+    kubectl delete deployment clean-text-deployment
+        corresponding pods will be automatically terminated
+
+Interpretation on ports:
+    app listens on 5000
+    service is configured to listen on 6000, and to forward to 5000
+    k forwards local 8080 to 6000
