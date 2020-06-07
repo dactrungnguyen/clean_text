@@ -1,4 +1,5 @@
 # folders
-src/api/__pycache__/
+src/front/__pycache__/
 src/back/__pycache__/
 .vscode/
+venv/

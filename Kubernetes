@@ -11,8 +11,10 @@ push image to registry docker hub
 
 create deployment
     k create deployment clean-text --image=dtndocker2/clean-text:0.0
-        app should be running indefinitely, otherwise the pod will start and stop immediately
+        app should be running indefinitely, otherwise the pod will start and stop immediately, making Kubernetes restart the container again and again
         a pod (or maybe multiple pods) will be created
+    when a new image is created using an existing tag and pushed, for some reason the old image is still used for *new deployements*
+        work-around: create deployment using image repo digest instead of tag
 
 view status
     k get deployment
@@ -21,6 +23,12 @@ view status
 view info
     k describe pod clean-text
     k describe deployment clean-text-85ccd685cb-gltnz
+
+expose the pod to create a service
+    expose deployment/clean-text --type="NodePort" --port=8080
+    there are multiple types of service
+
+access the service
 
 stop the app: delete the deployment
     k delete deployment clean-text
