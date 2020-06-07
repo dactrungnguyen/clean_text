@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-    name: clean-text-service
+    name: clean-text
 spec:
     selector:
         app: clean-text
@@ -15,7 +15,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: clean-text-deployment
+    name: clean-text
 spec:
     selector:
         matchLabels:
@@ -28,6 +28,6 @@ spec:
         spec:
             containers:
             -   name: clean-text
-                image: dtndocker2/clean-text:0.8
+                image: dtndocker2/clean-text:0.9
                 ports:
                 -   containerPort: 5000
