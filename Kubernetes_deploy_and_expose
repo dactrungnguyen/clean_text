@@ -4,7 +4,7 @@ Prepare Docker image
 
 Deploy and expose
     <edit> infra/front.yaml : tag <0.7>
-    kubectl apply -f infra/front.yaml
+    kubectl apply -f infra/deploy.yaml
 
 Access
     minikube service clean-text-service: not working
