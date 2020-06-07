@@ -5,4 +5,4 @@ RUN pip install -r requirements.txt
 WORKDIR /usr/app
 COPY src/back src/back
 COPY src/front src/front
-CMD ["python", "-m", "src.api"]
+CMD ["python", "-m", "src.front"]

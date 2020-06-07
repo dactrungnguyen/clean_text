@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: clean-text-deployment
+spec:
+    selector:
+        matchLabels:
+            app: clean-text
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: clean-text
+        spec:
+            containers:
+            -   name: clean-text
+                image: dtndocker2/clean-text@sha256:b52c3eb9a1faf738306958ee84c46aaac6d268bd921880e9002b6378ed7815af
+                ports:
+                -   containerPort: 80
