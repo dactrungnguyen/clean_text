@@ -29,5 +29,3 @@ spec:
             containers:
             -   name: clean-text
                 image: dtndocker2/clean-text:0.9
-                ports:
-                -   containerPort: 5000
