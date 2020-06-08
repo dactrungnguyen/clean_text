@@ -5,6 +5,7 @@ from werkzeug.datastructures import FileStorage
 from src.back.worker import clean_text
 
 app = Flask(__name__)
+app.config['RESTPLUS_MASK_SWAGGER'] = False
 api = Api(app)
 
 
