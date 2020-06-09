@@ -23,8 +23,9 @@ output_model = api.model('Output', {
 })
 
 @api.route('/clean')
-@api.expect(parser)
 class Clean(Resource):
+    @api.doc(params={'file': 'Input text file'})
+    @api.expect(parser)
     @api.marshal_with(output_model)
     def post(self):
         args = parser.parse_args()
