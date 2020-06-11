@@ -21,3 +21,7 @@ Interpretation on ports:
     app listens on 5000
     service is configured to listen on 6000, and to forward to 5000
     k forwards local 8080 to 6000
+
+OpenFaas
+    get gateway url:
+        minikube -n f3-openfaas-local service gateway-external --url

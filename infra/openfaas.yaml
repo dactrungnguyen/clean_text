@@ -1,0 +1,16 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://172.17.0.2:31112
+functions:
+  clean-text--v0-10:
+    namespace: f3-openfaas-fn-local
+    handler: .
+    image: dtndocker2/clean-text:v0.10
+    environment:
+      read_timeout:  "300s"  # Maximum time to read HTTP request
+      write_timeout: "300s"  # Maximum time to write HTTP response
+      upstream_timeout: "290s"  # Maximum duration of upstream function call
+      combine_output: false  # separate logs from result
+    secrets:
+      - dockerhub
