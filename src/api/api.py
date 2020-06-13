@@ -1,11 +1,11 @@
-import sqlite3
+from sqlite3 import connect
 from uuid import uuid4
 
 from flask import Flask, request
 from flask_restplus import Api, Resource, fields, reqparse
 from werkzeug.datastructures import FileStorage
 
-from src.back.worker import clean_text
+from src.back.lib import clean_text
 from src.lib.config import DB_PATH
 
 app = Flask(__name__)
@@ -36,7 +36,7 @@ run_list_model = api.model('run_list', {
 class AllRuns(Resource):
     @api.marshal_with(run_list_model)
     def get(self):
-        with sqlite3.connect(DB_PATH) as connection:
+        with connect(DB_PATH) as connection:
             cursor = connection.cursor()
             cursor.execute((
                 'SELECT r.id, r.state, r.input, r.output FROM runs AS r '
@@ -58,7 +58,7 @@ class AllRuns(Resource):
         uploaded = args['file']
         input_text = '' if uploaded is None else uploaded.stream.read().decode()
         run_id = str(uuid4())
-        with sqlite3.connect(DB_PATH) as connection:
+        with connect(DB_PATH) as connection:
             cursor = connection.cursor()
             cursor.execute((
                 'INSERT INTO runs (id, state, input, output) '
@@ -72,7 +72,7 @@ class AllRuns(Resource):
 class RunResource(Resource):
     @api.marshal_with(run_model)
     def get(self, run_id: str):
-        with sqlite3.connect(DB_PATH) as connection:
+        with connect(DB_PATH) as connection:
             cursor = connection.cursor()
             cursor.execute((
                 'SELECT r.id, r.state, r.input, r.output FROM runs AS r '
